@@ -48,7 +48,15 @@ public class indexController implements Serializable{
 
         if(usuarioAux!=null){
             System.out.println("Usuario recibido en el controlador");
-            return "/privado/pantallaInicio.xhtml";
+            
+            if(usuarioAux.getRol().getIdRol()==1){
+                System.out.println("\nUsuario: ENCARGADO");
+                return "/privado/encargado/pantallaInicio.xhtml";
+            } else {
+                System.out.println("\nUsuario: CLIENTE");
+                return "/privado/cliente/pantallaInicio.xhtml";
+
+            }
         } else {
             System.out.println("Usuario NULL en el controlador");
             return "/permisosInsuficientes.xhtml";
