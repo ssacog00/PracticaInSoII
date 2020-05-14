@@ -19,14 +19,14 @@
                     <p:panelGrid id="panel1" columns="2" layout="tabular" styleClass="ui-noborder">
                         
                         <p:outputLabel for="usuario" value="Usuario:" />
-                        <p:inputText id="usuario"  required="true" requiredMessage="Nombre es un campo obligatorio" />
+                        <p:inputText id="usuario" value="#{indexController.usuario.user}" required="true" requiredMessage="Nombre es un campo obligatorio" />
                         
                         <p:outputLabel for="password" value="Contraseña" />
-                        <p:password  id="password" required="true" requiredMessage="Contraseña es un campo obligatorio"/>
+                        <p:password value="#{indexController.usuario.password}" id="password" required="true" requiredMessage="Contraseña es un campo obligatorio"/>
                         
                     </p:panelGrid>
                     
-                    <p:commandButton value="Acceder" update="panel1"/>
+                    <p:commandButton value="Acceder" action="#{indexController.verificarUsuario()}" update="panel1"/>
                     
                 </p:fieldset>
             

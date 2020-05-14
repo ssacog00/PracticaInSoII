@@ -23,7 +23,7 @@ public class Encargado implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int idPersona;
+    private int idEncargado;
     
     @Column(name="nombre")
     private String nombre;
@@ -37,12 +37,12 @@ public class Encargado implements Serializable{
     @Column(name="productosAniadidos")
     private int productosAniadidos;
 
-    public int getIdPersona() {
-        return idPersona;
+    public int getIdEncargado() {
+        return idEncargado;
     }
 
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
+    public void setIdEncargado(int idEncargado) {
+        this.idEncargado = idEncargado;
     }
 
     public String getNombre() {
@@ -80,7 +80,7 @@ public class Encargado implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.idPersona;
+        hash = 47 * hash + this.idEncargado;
         return hash;
     }
 
@@ -96,7 +96,7 @@ public class Encargado implements Serializable{
             return false;
         }
         final Encargado other = (Encargado) obj;
-        if (this.idPersona != other.idPersona) {
+        if (this.idEncargado != other.idEncargado) {
             return false;
         }
         return true;
@@ -104,8 +104,7 @@ public class Encargado implements Serializable{
 
     @Override
     public String toString() {
-        return "Encargado{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", productosAniadidos=" + productosAniadidos + '}';
+        return "Encargado{" + "idEncargado=" + idEncargado + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", productosAniadidos=" + productosAniadidos + '}';
     }
-    
     
 }
