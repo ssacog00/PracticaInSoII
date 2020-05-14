@@ -48,10 +48,10 @@ public class indexController implements Serializable{
 
         if(usuarioAux!=null){
             System.out.println("Usuario recibido en el controlador");
-            return "";
+            return "/privado/pantallaInicio.xhtml";
         } else {
             System.out.println("Usuario NULL en el controlador");
-            return "";
+            return "/permisosInsuficientes.xhtml";
         }
          
     }
