@@ -28,7 +28,7 @@ public class Venta implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int idProducto;
+    private int idVenta;
     
     @JoinColumn(name="idCliente")
     @ManyToOne
@@ -42,12 +42,12 @@ public class Venta implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    public int getIdProducto() {
-        return idProducto;
+    public int getIdVenta() {
+        return idVenta;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
     }
 
     public Cliente getCliente() {
@@ -76,8 +76,8 @@ public class Venta implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.idProducto;
+        int hash = 7;
+        hash = 89 * hash + this.idVenta;
         return hash;
     }
 
@@ -93,7 +93,7 @@ public class Venta implements Serializable{
             return false;
         }
         final Venta other = (Venta) obj;
-        if (this.idProducto != other.idProducto) {
+        if (this.idVenta != other.idVenta) {
             return false;
         }
         return true;
@@ -101,9 +101,7 @@ public class Venta implements Serializable{
 
     @Override
     public String toString() {
-        return "Venta{" + "idProducto=" + idProducto + ", cliente=" + cliente + ", encargado=" + encargado + ", fecha=" + fecha + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", cliente=" + cliente + ", encargado=" + encargado + ", fecha=" + fecha + '}';
     }
-    
-    
-    
+
 }
