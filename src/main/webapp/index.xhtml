@@ -11,10 +11,15 @@
     <h:body id="principal">
         <h:form>
             
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+            
             <p:panelGrid columns="1">
                 
+                <p:commandLink class="botonRegistrar" value="Registrarse" action="/privado/cliente/AltaUsuario.xhtml" process="@this"/>
                 
-                <p:fieldset legend="Datos personales" style="margin-bottom:20px">
+                <p:fieldset legend="Iniciar Sesion" style="margin-bottom:20px">
                     
                     <p:panelGrid id="panel1" columns="2" layout="tabular" styleClass="ui-noborder">
                         
