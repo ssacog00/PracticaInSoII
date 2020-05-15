@@ -27,6 +27,9 @@ public class Producto implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idProducto;
     
+    @Column(name="nombre")
+    private String nombre;
+    
     @Column(name="descripcion")
     private String descripcion;
     

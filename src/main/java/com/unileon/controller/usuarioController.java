@@ -33,7 +33,6 @@ public class usuarioController implements Serializable{
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     
-    private List<Rol> listaRoles;
     private Usuario user;
     private Cliente cliente;
     private Rol rol;
@@ -42,18 +41,10 @@ public class usuarioController implements Serializable{
     @PostConstruct
     public void inicio(){
         user = new Usuario();
-        listaRoles = rolEJB.findAll();
         cliente = new Cliente();
         rol = new Rol();
     }
-
-    public List<Rol> getListaRoles() {
-        return listaRoles;
-    }
-
-    public void setListaRoles(List<Rol> listaRoles) {
-        this.listaRoles = listaRoles;
-    }
+    
 
     public Usuario getUser() {
         return user;

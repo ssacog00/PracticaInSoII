@@ -51,9 +51,9 @@
                         <p:panelGrid id="panel2" columns="3" layout="tabular" styleClass="ui-noborder">
                             
                             <p:outputLabel for="rol" value="Rol" />
-                            <p:selectOneMenu id="rol" value="#{usuarioController.rol.idRol}">
-                                <f:selectItems value="#{usuarioController.listaRoles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.idRol}" />
-                            </p:selectOneMenu>
+                            <p:selectOneButton id="rol" required="true" requiredMessage="Debe seleccionar el rol" value="#{usuarioController.rol.idRol}">
+                                <f:selectItem itemLabel="Cliente" itemValue="1"/>
+                            </p:selectOneButton> 
                             <p:message for="rol" />
                             
                             <p:outputLabel for="nombreUsuario" value="Nombre usuario" />
