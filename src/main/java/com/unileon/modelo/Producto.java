@@ -36,6 +36,9 @@ public class Producto implements Serializable{
     @Column(name="precio")
     private float precio;
     
+    @Column(name="urlImagen")
+    private String urlImagen;
+    
     @JoinColumn(name="idEncargado")
     @ManyToOne
     private Encargado encargado;
@@ -48,6 +51,14 @@ public class Producto implements Serializable{
         this.idProducto = idProducto;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -62,6 +73,14 @@ public class Producto implements Serializable{
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
     }
 
     public Encargado getEncargado() {
