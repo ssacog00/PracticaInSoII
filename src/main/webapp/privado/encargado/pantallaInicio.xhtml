@@ -45,7 +45,7 @@
                         
                     </p:dataTable>
                     
-                    <p:dialog width="50%" appendTo="#{p:component('datatable')}" header="Producto seleccionado" id="dialog" widgetVar="productDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+                    <p:dialog  header="Producto seleccionado" id="dialog" widgetVar="productDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
                         <p:outputPanel id="carDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{not empty pantallaInicioEncargadoController.productoSeleccionado}" columnClasses="label,value">
                                 <f:facet name="header">
@@ -65,7 +65,7 @@
                                 
                             </p:panelGrid>
                             
-                            <p:commandButton value="Modificar" actionListener=""/>
+                            <p:commandButton value="Modificar" actionListener="#{pantallaInicioEncargadoController.modificarProducto()}" update=":#{p:component('datatable')}" oncomplete="PF('productDialog').hide();" />
                             
                         </p:outputPanel>
                     </p:dialog>
