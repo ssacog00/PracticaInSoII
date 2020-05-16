@@ -1,14 +1,76 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                <h3>Bienvenido</h3>
+                
+                <h:form>
+                    
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                    
+                    <h1>Productos Disponibles</h1>
+                    
+                    <p:dataTable id="datatable" var="producto" value="#{pantallaInicioEncargadoController.listaProductos}">
+                        <p:column headerText="Imagen">
+                            <p:graphicImage value="#{producto.urlImagen}" title="#{producto.nombre}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{producto.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{producto.descripcion}" />
+                        </p:column>
+
+                        <p:column headerText="Precio">
+                            <h:outputText value="#{producto.precio}" />
+                        </p:column>
+                        
+                        <p:column>
+                            <p:commandButton oncomplete="PF('productDialog').show()" icon="pi pi-search" value="Modificar" update=":#{p:component('carDetail')}">
+                                <f:setPropertyActionListener value="#{producto}" target="#{pantallaInicioEncargadoController.productoSeleccionado}" />
+                            </p:commandButton>
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    <p:dialog width="50%" appendTo="#{p:component('datatable')}" header="Producto seleccionado" id="dialog" widgetVar="productDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty pantallaInicioEncargadoController.productoSeleccionado}" columnClasses="label,value">
+                                <f:facet name="header">
+                                    <p:graphicImage value="#{pantallaInicioEncargadoController.productoSeleccionado.urlImagen}" title="#{pantallaInicioClienteController.productoSeleccionado.nombre}"/>
+                                </f:facet>
+
+                                
+                                <h:outputText value="Nombre:" />
+                                <p:inputText value="#{pantallaInicioEncargadoController.productoSeleccionado.nombre}" />
+                                
+
+                                <h:outputText value="Descripcion:" />
+                                <p:inputTextarea rows="14" cols="40" maxlength="500" value="#{pantallaInicioEncargadoController.productoSeleccionado.descripcion}" autoResize="false" />
+
+                                <h:outputText value="Precio:" />
+                                <p:inputText value="#{pantallaInicioEncargadoController.productoSeleccionado.precio}" />
+                                
+                            </p:panelGrid>
+                            
+                            <p:commandButton value="Modificar" actionListener=""/>
+                            
+                        </p:outputPanel>
+                    </p:dialog>
+                    
+                </h:form>
             </ui:define>
 
         </ui:composition>

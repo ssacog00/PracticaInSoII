@@ -21,7 +21,7 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 
-public class pantallaInicioClienteController implements Serializable{
+public class pantallaInicioEncargadoController implements Serializable{
     
     @EJB
     private ProductoFacadeLocal productoEJB;
@@ -46,7 +46,4 @@ public class pantallaInicioClienteController implements Serializable{
     public void setProductoSeleccionado(Producto productoSeleccionado) {
         this.productoSeleccionado = productoSeleccionado;
     }
-    
-    
-    
 }
