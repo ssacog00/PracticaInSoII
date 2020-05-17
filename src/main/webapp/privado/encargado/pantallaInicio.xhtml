@@ -45,7 +45,9 @@
                         
                     </p:dataTable>
                     
-                    <p:dialog  header="Producto seleccionado" id="dialog" widgetVar="productDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+                    <p:commandButton value="Añadir Producto" action="/privado/encargado/aniadirProducto.xhtml"/>
+                    
+                     <p:dialog id="dialog" header="Producto seleccionado" widgetVar="productDialog" resizable="false" closeOnEscape="true" modal="true" draggable="false">
                         <p:outputPanel id="carDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{not empty pantallaInicioEncargadoController.productoSeleccionado}" columnClasses="label,value">
                                 <f:facet name="header">

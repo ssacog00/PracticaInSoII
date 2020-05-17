@@ -45,7 +45,7 @@
                         
                     </p:dataTable>
                     
-                    <p:dialog appendTo="#{p:component('datatable')}" header="Producto seleccionado" id="dialog" widgetVar="productDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true" width="500">
+                    <p:dialog id="dialog" header="Producto seleccionado" widgetVar="productDialog" resizable="false" closeOnEscape="true" modal="true" draggable="false">
                         <p:outputPanel id="carDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{not empty pantallaInicioClienteController.productoSeleccionado}" columnClasses="label,value">
                                 <f:facet name="header">
@@ -56,7 +56,7 @@
                                 <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.nombre}" />
 
                                 <h:outputText value="Descripcion:" />
-                                <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.descripcion}" />
+                                <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.descripcion}" style="display:block;width:230px"/>
 
                                 <h:outputText value="Precio" />
                                 <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.precio}"/>
