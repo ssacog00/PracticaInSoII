@@ -107,4 +107,27 @@ public class productoController implements Serializable{
         
         return true;
     }
+    
+    public String eliminarProducto(Producto producto){
+        try {
+            for(Producto p:listaProductos){
+                if(p.getIdProducto() == producto.getIdProducto()){
+                    producto = p;
+                    break;
+                }
+            }
+            productoEJB.remove(producto);
+            this.actualizarTabla();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado"));
+            
+        } catch(Exception e) {
+            System.out.println("Error al eliminar categoria: "+e.getMessage());
+        }
+        
+        return "/privado/encargado/pantallaInicio.xthml";
+    } 
+    
+    private void actualizarTabla() {
+        listaProductos = productoEJB.findAll();
+    }
 }

@@ -41,6 +41,10 @@
                             <p:commandButton oncomplete="PF('productDialog').show()" icon="pi pi-search" value="Modificar" update=":#{p:component('carDetail')}">
                                 <f:setPropertyActionListener value="#{producto}" target="#{pantallaInicioEncargadoController.productoSeleccionado}" />
                             </p:commandButton>
+                            
+                            <p:spacer width="20px" />
+                            
+                            <p:commandButton  value="Eliminar" action="#{productoController.eliminarProducto(producto)}" update=":#{p:component('datatable')}" />
                         </p:column>
                         
                     </p:dataTable>
