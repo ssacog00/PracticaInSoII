@@ -6,7 +6,6 @@
 package com.unileon.EJB;
 
 import com.unileon.modelo.Menu;
-import com.unileon.modelo.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,7 +29,5 @@ public interface MenuFacadeLocal {
     List<Menu> findRange(int[] range);
 
     int count();
-    
-    public List<Menu> obtenerMenusUsuario(Usuario us);
     
 }
