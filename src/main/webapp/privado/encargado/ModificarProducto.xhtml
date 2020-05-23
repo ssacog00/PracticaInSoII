@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h1>Modificar producto</h1>
+                
+                    <p:outputLabel value="Seleccione el producto que desea modificar        " />
+                    <p:selectOneMenu value="#{productoController.producto.idProducto}" >
+                        <f:selectItems value="#{productoController.listaProductos}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProducto}" />
+                    </p:selectOneMenu>
+                                      
+                    
+                    <p:panelGrid  columns="2" columnClasses="label,value">
+                        <p:outputLabel value="Introduzca el nuevo nombre:" />
+                        <p:inputText value="#{productoController.producto.nombre}" />
+
+                        <h:outputText value="Introduzca la nueva descripcion:" />
+                        <p:inputTextarea rows="14" cols="40" maxlength="500" value="#{productoController.producto.descripcion}" autoResize="false" />
+
+                        <h:outputText value="Introduzca el nuevo precio:" />
+                        <p:inputText value="#{productoController.producto.precio}" />
+                    </p:panelGrid>
+                    
+                    
+                    <p:commandButton value="Modificar" action="#{productoController.modificarProducto()}" />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

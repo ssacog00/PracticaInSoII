@@ -77,7 +77,6 @@ public class ProductoController implements Serializable{
                 
                 return "/privado/encargado/pantallaInicio.xhtml";
             } else {
-                System.out.println("\n\nPENDEJOOO\n\n");
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Datos introducidos incorrectos"));
                 return "";
             }
@@ -130,5 +129,53 @@ public class ProductoController implements Serializable{
     
     private void actualizarTabla() {
         listaProductos = productoEJB.findAll();
+    }
+    
+    public String modificarProducto() {
+        
+        try {
+            
+            String nuevoNombre = producto.getNombre();
+            String nuevaDescripcion = producto.getDescripcion();
+            Float nuevoPrecio = producto.getPrecio();
+
+            for(Producto p:listaProductos){
+                if(p.getIdProducto() == producto.getIdProducto()){
+                    producto = p;
+                    producto.setNombre(nuevoNombre);
+                    producto.setDescripcion(nuevaDescripcion);
+                    producto.setPrecio(nuevoPrecio);
+                    break;
+                }
+            }
+            productoEJB.edit(producto);
+            this.actualizarTabla();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto modificado con exito"));
+
+            return "/privado/encargado/pantallaInicio.xhtml";
+               
+        } catch(Exception e) {
+            System.out.println("Error al modificar producto: "+e.getMessage());
+            return "";
+        }
+    }
+    
+    public String eliminarProducto2(){
+        try {
+            for(Producto p:listaProductos){
+                if(p.getIdProducto() == producto.getIdProducto()){
+                    producto = p;
+                    break;
+                }
+            }
+            productoEJB.remove(producto);
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado con exito"));
+
+            return "/privado/encargado/pantallaInicio.xhtml";
+        } catch(Exception e) {
+            System.out.println("Error al eliminar producto: "+e.getMessage());
+            return "";
+        }
     }
 }
