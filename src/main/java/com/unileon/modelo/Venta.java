@@ -34,10 +34,6 @@ public class Venta implements Serializable{
     @ManyToOne
     private Cliente cliente;
     
-    @JoinColumn(name="idEncargado")
-    @ManyToOne
-    private Encargado encargado;
-    
     @Column(name="fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -56,14 +52,6 @@ public class Venta implements Serializable{
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Encargado getEncargado() {
-        return encargado;
-    }
-
-    public void setEncargado(Encargado encargado) {
-        this.encargado = encargado;
     }
 
     public Date getFecha() {
@@ -101,7 +89,7 @@ public class Venta implements Serializable{
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", cliente=" + cliente + ", encargado=" + encargado + ", fecha=" + fecha + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", cliente=" + cliente + ", fecha=" + fecha + '}';
     }
 
 }

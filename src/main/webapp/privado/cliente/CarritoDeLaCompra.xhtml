@@ -41,7 +41,7 @@
 
                     </p:dataTable>
                     
-                    <p:commandButton value="Comprar" />
+                    <p:commandButton value="Comprar" actionListener="#{carritoCompraController.realizarCompra()}" update=":#{p:component('datatable')}"/>
                     
                 </h:form>
             </ui:define>
