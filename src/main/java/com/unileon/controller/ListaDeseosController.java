@@ -7,6 +7,7 @@ package com.unileon.controller;
 
 import com.unileon.EJB.ListaDeseosFacadeLocal;
 import com.unileon.modelo.ListaDeseos;
+import com.unileon.modelo.Producto;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -66,5 +67,12 @@ public class ListaDeseosController implements Serializable{
     
     private void actualizarTabla() {
         listaDeseos = deseosEJB.findAll();
+    }
+    
+    public void aniadirCarrito(ListaDeseos deseo){
+        List<Producto> listaAux =  (List<Producto>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("listaCarrito");
+        listaAux.add(deseo.getProducto());
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listaCarrito", listaAux);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto añadido al carrito de la compra"));
     }
 }

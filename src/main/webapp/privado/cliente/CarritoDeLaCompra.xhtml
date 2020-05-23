@@ -11,43 +11,39 @@
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                
                 <h:form>
                     <p:messages id="messages" showDetail="true" closable="true">
                         <p:autoUpdate />
                     </p:messages>
 
-                    <h1>Lista de deseos</h1>
+                    <h1>Carrito de la compra</h1>
 
-                    <p:dataTable id="datatable" var="deseo" value="#{listaDeseosController.listaDeseos}" style="text-align: center">
+                    <p:dataTable id="datatable" var="producto" value="#{carritoCompraController.listaProductos}" style="text-align: center">
                         <p:column headerText="Imagen">
-                            <p:graphicImage value="#{deseo.producto.urlImagen}" title="#{deseo.producto.nombre}"/>
+                            <p:graphicImage value="#{producto.urlImagen}" title="#{producto.nombre}"/>
                         </p:column>
 
                         <p:column headerText="Nombre">
-                            <h:outputText value="#{deseo.producto.nombre}" />
+                            <h:outputText value="#{producto.nombre}" />
                         </p:column>
 
                         <p:column headerText="Descripción">
-                            <h:outputText value="#{deseo.producto.descripcion}" />
+                            <h:outputText value="#{producto.descripcion}" />
                         </p:column>
 
                         <p:column headerText="Precio">
-                            <h:outputText value="#{deseo.producto.precio}" />
-                        </p:column>
-
-                        <p:column headerText="Nivel de deseo">
-                            <p:rating value="#{deseo.valoracion}" readonly="true" />
+                            <h:outputText value="#{producto.precio}" />
                         </p:column>
 
                         <p:column>
-                            <p:commandButton value="Eliminar" actionListener="#{listaDeseosController.eliminarDeseo(deseo)}" update=":#{p:component('datatable')}"/>
-                            <p:commandButton value="Añadir al carrito" actionListener="#{listaDeseosController.aniadirCarrito(deseo)}"/>
+                            <p:commandButton value="Eliminar" actionListener="#{carritoCompraController.quitarProducto(producto)}" update=":#{p:component('datatable')}"/>
                         </p:column>
 
                     </p:dataTable>
+                    
+                    <p:commandButton value="Comprar" />
+                    
                 </h:form>
-                
             </ui:define>
 
         </ui:composition>

@@ -85,4 +85,10 @@ public class PantallaInicioClienteController implements Serializable{
         }
     }
     
+    public void aniadirCarrito(){
+        List<Producto> listaAux =  (List<Producto>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("listaCarrito");
+        listaAux.add(productoSeleccionado);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listaCarrito", listaAux);
+    }
+    
 }
