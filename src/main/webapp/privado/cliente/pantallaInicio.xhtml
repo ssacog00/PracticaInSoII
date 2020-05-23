@@ -61,8 +61,11 @@
                                 <h:outputText value="Precio" />
                                 <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.precio}"/>
                                 
+                                <h:outputLabel for="@next" value="Nivel de deseo: " />
+                                <p:spinner id="rotate" value="#{pantallaInicioClienteController.enumValue}" min="1" max="5"/>
+                                
                                 <p:commandButton value="Añadir al carrito" />
-                                <p:commandButton value="Añadir a deseos" />
+                                <p:commandButton value="Añadir a deseos" actionListener="#{pantallaInicioClienteController.nuevoDeseo()}" oncomplete="PF('productDialog').hide();"/>
                             </p:panelGrid>
                             
                             
