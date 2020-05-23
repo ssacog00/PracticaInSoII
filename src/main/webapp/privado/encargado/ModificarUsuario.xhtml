@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
+
+            <ui:define name="content">
+                 <h:form>
+                    <h1>Modificar datos cliente</h1>
+                    
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                    
+                    <p:outputLabel value="Seleccione categoria a modificar              " />
+                    <p:selectOneMenu value="#{usuarioController.cliente.idCliente}" >
+                        <f:selectItems value="#{usuarioController.listaClientes}" var="cli" itemLabel="#{cli.nombre}" itemValue="#{cli.idCliente}" />
+                    </p:selectOneMenu>
+                    
+                    <p:panelGrid columns="3" layout="tabular" styleClass="ui-noborder">
+                        <p:outputLabel for="nombre" value="Introduzca el nombre: " />
+                        <p:inputText id="nombre" value="#{usuarioController.cliente.nombre}" required="true" requiredMessage="Nombre es un campo obligatorio"/>
+                        <p:message for="nombre" display="text"/>
+                        
+                        <p:outputLabel for="primerApellido" value="Introduzca el primer apellido: " />
+                        <p:inputText id="primerApellido" value="#{usuarioController.cliente.apellido1}" required="true" requiredMessage="Primer Apellido es un campo obligatorio"/>
+                        <p:message for="primerApellido" />
+                        
+                        <p:outputLabel for="segundoApellido" value="Introduzca el segundo apellido: " />
+                        <p:inputText id="segundoApellido" value="#{usuarioController.cliente.apellido2}" required="true" requiredMessage="Segundo Apellido es un campo obligatorio"/>
+                        <p:message for="segundoApellido" />
+                        
+                        <p:outputLabel for="sexo" value="Introduzca el sexo: " />
+                        <p:selectOneButton id="sexo" value="#{usuarioController.cliente.sexo}">
+                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                        </p:selectOneButton> 
+                        <p:message for="sexo"/>
+                        
+                        <p:outputLabel for="fechaNacimiento" value="Introduzca la fecha de nacimiento: " />
+                        <p:calendar locale="es" id="fechaNacimiento" value="#{usuarioController.cliente.fechaNacimiento}" pattern="yyyy-MM-dd HH:mm:ss" required="true"  requiredMessage="Fecha de nacimiento es un campo obligatorio"/>
+                        <p:message for="fechaNacimiento"/>
+                        
+                    </p:panelGrid>
+                    
+                    <p:commandButton value="Modificar" action="#{usuarioController.modificarCliente()}" />
+                    
+                </h:form>
+                
+                <h:outputScript library="js" name="calendario.js" />
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
