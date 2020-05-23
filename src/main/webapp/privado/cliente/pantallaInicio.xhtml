@@ -14,6 +14,8 @@
                
                 <h:form>
                     
+                    <f:event type="preRenderView" listener="#{carritoCompraController.inicio()}" />
+                    
                     <p:messages id="messages" showDetail="true" closable="true">
                         <p:autoUpdate />
                     </p:messages>
@@ -45,7 +47,7 @@
                         
                     </p:dataTable>
                     
-                    <p:dialog id="dialog" header="Producto seleccionado" widgetVar="productDialog" resizable="false" closeOnEscape="true" modal="true" draggable="false">
+                    <p:dialog id="dialog" header="Producto seleccionado" widgetVar="productDialog" resizable="false" closeOnEscape="true" modal="true" draggable="true">
                         <p:outputPanel id="carDetail" style="text-align:center;">
                             <p:panelGrid  columns="2" rendered="#{not empty pantallaInicioClienteController.productoSeleccionado}" columnClasses="label,value">
                                 <f:facet name="header">
@@ -61,8 +63,11 @@
                                 <h:outputText value="Precio" />
                                 <h:outputText value="#{pantallaInicioClienteController.productoSeleccionado.precio}"/>
                                 
-                                <p:commandButton value="Añadir al carrito" />
-                                <p:commandButton value="Añadir a deseos" />
+                                <h:outputLabel for="@next" value="Nivel de deseo: " />
+                                <p:spinner id="rotate" value="#{pantallaInicioClienteController.enumValue}" min="1" max="5"/>
+                                
+                                <p:commandButton value="Añadir al carrito" actionListener="#{pantallaInicioClienteController.aniadirCarrito()}" oncomplete="PF('productDialog').hide();"/>
+                                <p:commandButton value="Añadir a deseos" actionListener="#{pantallaInicioClienteController.nuevoDeseo()}" oncomplete="PF('productDialog').hide();"/>
                             </p:panelGrid>
                             
                             
