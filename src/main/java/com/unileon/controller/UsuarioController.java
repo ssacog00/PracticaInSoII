@@ -9,6 +9,7 @@ package com.unileon.controller;
 import com.unileon.EJB.RolFacadeLocal;
 import com.unileon.EJB.UsuarioFacadeLocal;
 import com.unileon.modelo.Cliente;
+import com.unileon.modelo.Encargado;
 import com.unileon.modelo.Rol;
 import com.unileon.modelo.Usuario;
 import java.io.Serializable;
@@ -36,6 +37,7 @@ public class UsuarioController implements Serializable{
     
     private Usuario user;
     private Cliente cliente;
+    private Encargado encargado;
     private Rol rol;
     
     
@@ -43,6 +45,7 @@ public class UsuarioController implements Serializable{
     public void inicio(){
         user = new Usuario();
         cliente = new Cliente();
+        encargado = new Encargado();
         rol = new Rol();
     }
     
@@ -63,6 +66,14 @@ public class UsuarioController implements Serializable{
         this.cliente = cliente;
     }
 
+    public Encargado getEncargado() {
+        return encargado;
+    }
+
+    public void setEncargado(Encargado encargado) {
+        this.encargado = encargado;
+    }
+
     public Rol getRol() {
         return rol;
     }
@@ -72,16 +83,52 @@ public class UsuarioController implements Serializable{
     }
     
     
-    public void create() {
+    public String createCliente() {
         try {
             user.setCliente(cliente);
+            rol.setIdRol(2);
             user.setRol(rol);
             
             usuarioEJB.create(user);
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Cliente registrado"));
+            return "/index.xhtml";
         } catch(Exception e){
             System.out.println("Error: "+ e.getMessage());
+            return "";
+        }
+    }
+    
+    public String createCliente2() {
+        try {
+            user.setCliente(cliente);
+            rol.setIdRol(2);
+            user.setRol(rol);
+            
+            usuarioEJB.create(user);
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Cliente registrado"));
+            return "/privado/encargado/pantallaInicio.xhtml";
+        } catch(Exception e){
+            System.out.println("Error: "+ e.getMessage());
+            return "";
+        }
+    }
+    
+    public String createEncargado() {
+        try {
+            encargado.setProductosAniadidos(0);
+            user.setEncargado(encargado);
+            rol.setIdRol(1);
+            user.setRol(rol);
+            
+            usuarioEJB.create(user);
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Encargado registrado"));
+            return "/privado/encargado/pantallaInicio.xhtml";
+        } catch(Exception e){
+            System.out.println("Error: "+ e.getMessage());
+            return "";
         }
     }
 }
