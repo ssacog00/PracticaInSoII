@@ -159,4 +159,23 @@ public class ProductoController implements Serializable{
             return "";
         }
     }
+    
+    public String eliminarProducto2(){
+        try {
+            for(Producto p:listaProductos){
+                if(p.getIdProducto() == producto.getIdProducto()){
+                    producto = p;
+                    break;
+                }
+            }
+            productoEJB.remove(producto);
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado con exito"));
+
+            return "/privado/encargado/pantallaInicio.xhtml";
+        } catch(Exception e) {
+            System.out.println("Error al eliminar producto: "+e.getMessage());
+            return "";
+        }
+    }
 }
