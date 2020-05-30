@@ -8,10 +8,13 @@ package com.unileon.controller;
 import com.unileon.EJB.ListaDeseosFacadeLocal;
 import com.unileon.modelo.ListaDeseos;
 import com.unileon.modelo.Producto;
+import com.unileon.modelo.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -29,12 +32,24 @@ public class ListaDeseosController implements Serializable{
     @EJB
     private ListaDeseosFacadeLocal deseosEJB;
     
-    private List<ListaDeseos> listaDeseos;
+    private List<ListaDeseos> listaDeseos = new ArrayList<>();
     
     
     @PostConstruct
     public void init() {
-        listaDeseos = deseosEJB.findAll();
+        List<ListaDeseos> listaDeseosAux = deseosEJB.findAll();
+        this.filtrarLista(listaDeseosAux);
+    }
+    
+    private void filtrarLista(List<ListaDeseos> listaAux) {
+        
+        Usuario usAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
+        for(ListaDeseos d:listaAux) {
+            if(usAux.getCliente().getIdCliente() == d.getCliente().getIdCliente()) {
+                listaDeseos.add(d);
+            }
+        }
     }
 
     public List<ListaDeseos> getListaDeseos() {
@@ -52,6 +67,7 @@ public class ListaDeseosController implements Serializable{
             for(ListaDeseos d:listaDeseos){
                 if(d.getIdDeseos() == deseo.getIdDeseos()){
                     deseo = d;
+                    System.out.println("\n\n\nDESEO ENCONTRADO\n\n");
                     break;
                 }
             }
@@ -66,7 +82,16 @@ public class ListaDeseosController implements Serializable{
     } 
     
     private void actualizarTabla() {
-        listaDeseos = deseosEJB.findAll();
+        Usuario usAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
+        listaDeseos = new ArrayList<>();
+        List<ListaDeseos> listaDeseosAux = deseosEJB.findAll();
+        
+        for(ListaDeseos d:listaDeseosAux) {
+            if(usAux.getCliente().getIdCliente() == d.getCliente().getIdCliente()) {
+                listaDeseos.add(d);
+            }
+        }
     }
     
     public void aniadirCarrito(ListaDeseos deseo){

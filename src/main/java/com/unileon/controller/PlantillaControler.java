@@ -23,7 +23,7 @@ public class PlantillaControler implements Serializable{
     public void verificarYMostrar() throws IOException{
         
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") == null){
-            FacesContext.getCurrentInstance().getExternalContext().redirect("../../permisosInsuficientes.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../../permisosInsuficientes.softwareII");
         }
         
     }

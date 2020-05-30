@@ -6,7 +6,11 @@
 package com.unileon.controller;
 
 
+import com.unileon.EJB.LineaVentaFacadeLocal;
+import com.unileon.EJB.ListaDeseosFacadeLocal;
 import com.unileon.EJB.ProductoFacadeLocal;
+import com.unileon.modelo.LineaVenta;
+import com.unileon.modelo.ListaDeseos;
 import com.unileon.modelo.Producto;
 import com.unileon.modelo.Usuario;
 import java.io.Serializable;
@@ -29,6 +33,12 @@ public class ProductoController implements Serializable{
     
     @EJB
     private ProductoFacadeLocal productoEJB;
+    
+    @EJB
+    private LineaVentaFacadeLocal lineaVentaEJB;
+    
+    @EJB
+    private ListaDeseosFacadeLocal deseosEJB;
     
     private List<Producto> listaProductos;
     private Producto producto;
@@ -99,6 +109,11 @@ public class ProductoController implements Serializable{
         
         try{
             producto.setPrecio(Float.parseFloat(auxPrecio)); // convirtiendo la cadena
+            
+            if(producto.getPrecio() <= 0){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "El precio no puede ser negativo"));
+                return false;
+            }
         }catch(NumberFormatException e){
             // captura la exepcion, en caso de que no sea un formato de Float
             //valido y envia un mensaje.
@@ -109,22 +124,30 @@ public class ProductoController implements Serializable{
     }
     
     public String eliminarProducto(Producto producto){
-        try {
-            for(Producto p:listaProductos){
-                if(p.getIdProducto() == producto.getIdProducto()){
-                    producto = p;
-                    break;
+        
+        if(comprobarAparicionesProducto(producto)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "El producto no ha podido ser borrado"));
+            System.out.println("\n\n\nNO SE HA PODIDO BORRAR\n\n");
+            return "";
+        } else {
+            try {
+                for(Producto p:listaProductos){
+                    if(p.getIdProducto() == producto.getIdProducto()){
+                        producto = p;
+                        break;
+                    }
                 }
+                productoEJB.remove(producto);
+                this.actualizarTabla();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado"));
+                return "/privado/encargado/pantallaInicio.xthml";
+
+            } catch(Exception e) {
+                System.out.println("Error al eliminar categoria: "+e.getMessage());
             }
-            productoEJB.remove(producto);
-            this.actualizarTabla();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado"));
-            
-        } catch(Exception e) {
-            System.out.println("Error al eliminar categoria: "+e.getMessage());
         }
         
-        return "/privado/encargado/pantallaInicio.xthml";
+        return "";
     } 
     
     private void actualizarTabla() {
@@ -161,21 +184,52 @@ public class ProductoController implements Serializable{
     }
     
     public String eliminarProducto2(){
-        try {
-            for(Producto p:listaProductos){
-                if(p.getIdProducto() == producto.getIdProducto()){
-                    producto = p;
-                    break;
-                }
-            }
-            productoEJB.remove(producto);
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado con exito"));
-
-            return "/privado/encargado/pantallaInicio.xhtml";
-        } catch(Exception e) {
-            System.out.println("Error al eliminar producto: "+e.getMessage());
+        
+        if(comprobarAparicionesProducto(producto)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "El producto no ha podido ser borrado"));
+            System.out.println("\n\n\nNO SE HA PODIDO BORRAR\n\n");
             return "";
+        } else {
+            try {
+                for(Producto p:listaProductos){
+                    if(p.getIdProducto() == producto.getIdProducto()){
+                        producto = p;
+                        break;
+                    }
+                }
+                productoEJB.remove(producto);
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Producto eliminado con exito"));
+
+                return "/privado/encargado/pantallaInicio.xhtml";
+            } catch(Exception e) {
+                System.out.println("Error al eliminar producto: "+e.getMessage());
+                return "";
+            }
         }
+    }
+    
+    public boolean comprobarAparicionesProducto(Producto producto) {
+        
+        List<LineaVenta> lineasDeVenta = lineaVentaEJB.findAll();
+        List<ListaDeseos> deseos = deseosEJB.findAll();
+        
+        boolean encontrado = false;
+        
+        for(LineaVenta lv:lineasDeVenta) {
+            if(lv.getProducto().getIdProducto() == producto.getIdProducto()) {
+                encontrado = true;
+                System.out.println("\n\n\nPRODUCTO ENCONTRADO EN VENTA\n\n");
+            }
+        }
+        
+        for(ListaDeseos ld:deseos) {
+            if(ld.getProducto().getIdProducto() == producto.getIdProducto()){
+                encontrado = true;
+                System.out.println("\n\n\nPRODUCTO ENCONTRADO EN DESEOS\n\n");
+            }
+        }
+        
+        return encontrado;
     }
 }

@@ -18,9 +18,9 @@
                         <p:autoUpdate />
                     </p:messages>
                     
-                    <h1>Productos Disponibles</h1>
+                    <h1 class="h1Especial">Productos Disponibles</h1>
                     
-                    <p:dataTable id="datatable" var="producto" value="#{pantallaInicioEncargadoController.listaProductos}">
+                    <p:dataTable class="table" id="datatable" var="producto" value="#{pantallaInicioEncargadoController.listaProductos}">
                         <p:column headerText="Imagen">
                             <p:graphicImage value="#{producto.urlImagen}" title="#{producto.nombre}"/>
                         </p:column>
@@ -44,7 +44,7 @@
                             
                             <p:spacer width="20px" />
                             
-                            <p:commandButton  value="Eliminar" action="#{productoController.eliminarProducto(producto)}" update=":#{p:component('datatable')}"/>
+                            <p:commandButton value="Eliminar" action="#{productoController.eliminarProducto(producto)}" update=":#{p:component('datatable')}"/>
                         </p:column>
                         
                     </p:dataTable>

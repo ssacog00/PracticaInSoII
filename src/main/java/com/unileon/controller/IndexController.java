@@ -52,15 +52,15 @@ public class IndexController implements Serializable{
             
             if(usuarioAux.getRol().getIdRol()==1){
                 System.out.println("\nUsuario: ENCARGADO");
-                return "/privado/encargado/pantallaInicio.xhtml";
+                return "/privado/encargado/pantallaInicio.xhtml?faces-redirect=true";
             } else {
                 System.out.println("\nUsuario: CLIENTE");
-                return "/privado/cliente/pantallaInicio.xhtml";
+                return "/privado/cliente/pantallaInicio.xhtml?faces-redirect=true";
 
             }
         } else {
             System.out.println("Usuario NULL en el controlador");
-            return "/permisosInsuficientes.xhtml";
+            return "/permisosInsuficientes.xhtml?faces-redirect=true";
         }
          
     }

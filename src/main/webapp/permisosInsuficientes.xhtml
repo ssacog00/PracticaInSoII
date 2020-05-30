@@ -5,12 +5,32 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Pemisos Insuficientes</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div><h3>Permisos INSUFICIENTES</h3></div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>        
+        <title>Permisos insuficientos</title>
+    </h:head>
+    
+    <h:body id="principal" style="background-image: url('resources/img/fondo6.jpg');">
+        <h:form>
+            
+            <p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
+                <p:outputLabel class="etiqueta" style="font-size: 40px" value="PERMISOS INSUFICIENTES " />
+                
+                <p:spacer height="40px" />
+                
+                <p:outputLabel class="etiqueta" value="Navegación por el sitio denegada" />
+                <p:outputLabel class="etiqueta" value="--------" />
+                <p:outputLabel class="etiqueta" value="Por favor inicie sesión con los credenciales correctos" />
+                
+                <p:spacer height="60px" />
+            </p:panelGrid>
+                    
+            <p:commandLink value="Volver" action="/index.xhtml?faces-redirect=true" class="botonVolver"/>
+        </h:form>
+        
+        <h:outputStylesheet library="css" name="permisosInsuficientes.css"/>
+    </h:body>
 </html>

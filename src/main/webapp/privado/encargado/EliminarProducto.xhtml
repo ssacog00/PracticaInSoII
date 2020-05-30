@@ -11,15 +11,36 @@
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    <h1>Eliminar pruduto</h1>
-                    <p:outputLabel value="Selecciona el producto que desea borrar" />
-                    <p:selectOneMenu value="#{productoController.producto.idProducto}">
-                        <f:selectItems value="#{productoController.listaProductos}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProducto}"/>
-                    </p:selectOneMenu>
+                <h:form class="centrado">
+                    
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                    
+                    <h1>Eliminar produto</h1>
+                    
+                    <p:panelGrid  columns="5" styleClass="ui-noborder" style="margin-top: 15px;margin-bottom: 15px">
+                        <p:outputLabel value="Selecciona el producto que desea borrar" />
+                        
+                        <p:spacer width="20px" />
+                        
+                        <p:selectOneMenu value="#{productoController.producto.idProducto}">
+                            <f:selectItems value="#{productoController.listaProductos}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProducto}"/>
+                        </p:selectOneMenu>
 
-                    <p:commandButton value="Eliminar" action="#{productoController.eliminarProducto2()}" />
+                        <p:spacer width="20px" />
+                        
+                        <p:commandButton value="Eliminar" action="#{productoController.eliminarProducto2()}" />
+                    </p:panelGrid>
+                    
                 </h:form>
+            </ui:define>
+            
+            <ui:define name="bottom">
+                <h:form class="bottom2">
+                    <p>Universidad de León</p>
+                    <p:graphicImage value="../../resources/img/ule.png" title="Universidad de León"/>
+                </h:form>                
             </ui:define>
 
         </ui:composition>

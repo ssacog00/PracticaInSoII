@@ -11,7 +11,7 @@
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                 <h:form>
+                 <h:form class="centrado">
                     <h1>Registro cliente</h1>
                     
                     <p:messages id="messages" showDetail="true" closable="true">
@@ -70,6 +70,13 @@
                 </h:form>
                 
                 <h:outputScript library="js" name="calendario.js" />
+            </ui:define>
+            
+            <ui:define name="bottom">
+                <h:form class="bottom2">
+                    <p>Universidad de León</p>
+                    <p:graphicImage value="../../resources/img/ule.png" title="Universidad de León"/>
+                </h:form>                
             </ui:define>
 
         </ui:composition>

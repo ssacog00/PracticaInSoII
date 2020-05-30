@@ -11,19 +11,27 @@
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                 <h:form>
+                 <h:form class="centrado">
                     <h1>Modificar datos cliente</h1>
                     
                     <p:messages id="messages" showDetail="true" closable="true">
                         <p:autoUpdate />
                     </p:messages>
                     
+                    <p:spacer height="2px" width="100%"/>
+                    
                     <p:outputLabel value="Seleccione categoria a modificar              " />
+                    
+                    <p:spacer width="20px"/>
+                    
                     <p:selectOneMenu value="#{usuarioController.cliente.idCliente}" >
                         <f:selectItems value="#{usuarioController.listaClientes}" var="cli" itemLabel="#{cli.nombre}" itemValue="#{cli.idCliente}" />
                     </p:selectOneMenu>
                     
+                    <p:spacer height="7px" width="100%"/>
+                    
                     <p:panelGrid columns="3" layout="tabular" styleClass="ui-noborder">
+                        
                         <p:outputLabel for="nombre" value="Introduzca el nombre: " />
                         <p:inputText id="nombre" value="#{usuarioController.cliente.nombre}" required="true" requiredMessage="Nombre es un campo obligatorio"/>
                         <p:message for="nombre" display="text"/>
@@ -49,12 +57,21 @@
                         
                     </p:panelGrid>
                     
+                    <p:spacer height="10px" width="100%"/>
+                    
                     <p:commandButton value="Modificar" action="#{usuarioController.modificarCliente()}" />
                     
                 </h:form>
                 
                 <h:outputScript library="js" name="calendario.js" />
                 
+            </ui:define>
+            
+            <ui:define name="bottom">
+                <h:form class="bottom2">
+                    <p>Universidad de León</p>
+                    <p:graphicImage value="../../resources/img/ule.png" title="Universidad de León"/>
+                </h:form>                
             </ui:define>
 
         </ui:composition>

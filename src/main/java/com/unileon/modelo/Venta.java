@@ -37,6 +37,9 @@ public class Venta implements Serializable{
     @Column(name="fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    
+    @Column(name="total")
+    private float total;
 
     public int getIdVenta() {
         return idVenta;
@@ -61,6 +64,15 @@ public class Venta implements Serializable{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -89,7 +101,7 @@ public class Venta implements Serializable{
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", cliente=" + cliente + ", fecha=" + fecha + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", cliente=" + cliente + ", fecha=" + fecha + ", total=" + total + '}';
     }
 
 }

@@ -20,9 +20,9 @@
                         <p:autoUpdate />
                     </p:messages>
                     
-                    <h1>Productos Disponibles</h1>
+                    <h1 class="h1Especial">Productos Disponibles</h1>
                     
-                    <p:dataTable id="datatable" var="producto" value="#{pantallaInicioClienteController.listaProductos}">
+                    <p:dataTable class="table" id="datatable" var="producto" value="#{pantallaInicioClienteController.listaProductos}">
                         <p:column headerText="Imagen">
                             <p:graphicImage value="#{producto.urlImagen}" title="#{producto.nombre}"/>
                         </p:column>

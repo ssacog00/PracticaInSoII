@@ -1,17 +1,24 @@
-
 #top {
     position: relative;
-    background-color: #036fab;
-    color: white;
+    color: black;
     padding: 5px;
     margin: 0px 0px 10px 0px;
 }
 
 #bottom {
     position: relative;
-    background-color: #c2dfef;
-    padding: 5px;
-    margin: 10px 0px 0px 0px;
+    bottom: 0;
+    width: 100%;
+    background-color: #dddddd;
+    text-align: center;
+}
+
+.bottom2 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #dddddd;
+    text-align: center;
 }
 
 #left {
@@ -30,8 +37,21 @@
 
 .center_content {
     position: relative;
+    padding: 5px;
+    display: inline-block;
+}
+
+.centrado {
     background-color: #dddddd;
     padding: 5px;
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: auto;
+    text-align: center;
 }
 
 .left_content {
@@ -47,7 +67,7 @@
 }
 
 #top a:link, #top a:visited {
-  color: white;
+  color: black;
   font-weight : bold;
   text-decoration: none;
 }

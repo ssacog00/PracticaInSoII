@@ -8,6 +8,12 @@
     text-align: center;
 }
 
-.botonRegistrar{
-    float: right;
+.etiqueta {
+    color: white
+}
+
+
+.botonVolver {
+    text-decoration: underline white;
+    color: white;
 }

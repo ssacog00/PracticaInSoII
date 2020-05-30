@@ -8,6 +8,7 @@ package com.unileon.controller;
 import com.unileon.EJB.MenuFacadeLocal;
 import com.unileon.modelo.Menu;
 import com.unileon.modelo.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -102,11 +103,10 @@ public class MenuController implements Serializable{
         return modelo;
     }
 
-    public String destruirSesion() {
+    public void destruirSesion() throws IOException {
         
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        
-        return "/index.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./../../");
     }
     
     

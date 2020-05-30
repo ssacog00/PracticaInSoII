@@ -8,8 +8,8 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="resources/css/default.css"/>
-        <h:outputStylesheet name="resources/css/cssLayout.css"/>
+        <h:outputStylesheet  library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
         <title>Facelets Template</title>
         
         <f:event type="preRenderView" listener="#{plantillaControler.verificarYMostrar()}" />
@@ -20,9 +20,13 @@
         <div id="top">
             <ui:insert name="top">
                 <h:form> 
-                    <p:menubar model="#{menuController.modelo}" />
+                    <p:menubar model="#{menuController.modelo}" >
+                        <f:facet name="options">
+                            <p:commandButton value="Cerrar Sesion" action="#{menuController.destruirSesion()}"/>
+                        </f:facet>
+                    </p:menubar>
                     
-                    <p:commandButton value="Cerrar Sesion" action="#{menuController.destruirSesion()}"/>
+                    
                 </h:form>
             </ui:insert>
         </div>
@@ -30,10 +34,15 @@
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
+        
 
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">
+                <p>Universidad de León</p>
+                <p:graphicImage value="../../resources/img/ule.png" title="Universidad de León"/>
+            </ui:insert>
         </div>
+        
 
     </h:body>
 

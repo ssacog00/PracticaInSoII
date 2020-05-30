@@ -42,6 +42,7 @@ public class CarritoCompraController implements Serializable{
     private List<Integer> cantidades = new ArrayList<>();
     private Venta venta;
     private LineaVenta lineadeVenta;
+    float precioTotal = 0;
 
     @PostConstruct
     public void inicio(){
@@ -79,23 +80,17 @@ public class CarritoCompraController implements Serializable{
         *       Se crea una venta y tantas lineas de venta como productos
         */
         this.calcularCantidades();
+        this.calcularPrecioTotal();
         List<Producto> listaProductosAux = (List<Producto>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("listaCarrito");
-        
-        System.out.println("\n\nCONTENIDO:   \n\n\n");
-        for(int i=0; i<listaProductosAux.size(); i++) {
-            System.out.println(listaProductosAux.get(i).getIdProducto());
-        }
-        
-        System.out.println("Tamaño: "+cantidades.size());
         
         if(!listaProductosAux.isEmpty()){
             
-        
             //Creamos la venta
             venta = new Venta();
             Usuario usAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             venta.setCliente(usAux.getCliente());
-            
+            venta.setFecha(new Date());
+            venta.setTotal(precioTotal);
             ventaEJB.create(venta);
             
             //Creamos las lineas de venta
@@ -112,9 +107,19 @@ public class CarritoCompraController implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Compra realizada correctamente"));
             listaProductos = new ArrayList<>();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listaCarrito", listaProductos);
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Compra abortada: sin productos en el carrito"));
         }
         
         return "privado/cliente/pantallaInicio.xhtml";
+    }
+    
+    private void calcularPrecioTotal(){
+        List<Producto> listaProductosAux = (List<Producto>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("listaCarrito");
+        
+        for (int i=0; i<listaProductosAux.size(); i++) {
+            precioTotal += listaProductosAux.get(i).getPrecio()*cantidades.get(i);
+        }
     }
     
     

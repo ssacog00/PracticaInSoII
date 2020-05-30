@@ -1,0 +1,36 @@
+#principal{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: auto;
+    text-align: center;
+    background-image: url("#{resource['img/fondo6.jpg']}"); 
+}
+
+.contenido {
+    background-color: #dddddd;
+    padding: 5px;
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: auto;
+    text-align: center;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  20px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    color: #D20005;
+}

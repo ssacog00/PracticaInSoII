@@ -11,16 +11,19 @@
         <ui:composition template="./../../WEB-INF/template/newTemplate.xhtml">
 
             <ui:define name="content">
-                <h:form>
+                <h:form class="centrado">
                     <h1>Modificar producto</h1>
                 
+                    <p:spacer height="10px" width="100%"/>
+                    
                     <p:outputLabel value="Seleccione el producto que desea modificar        " />
+                    <p:spacer width="20px" />
                     <p:selectOneMenu value="#{productoController.producto.idProducto}" >
                         <f:selectItems value="#{productoController.listaProductos}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProducto}" />
                     </p:selectOneMenu>
                                       
                     
-                    <p:panelGrid  columns="2" columnClasses="label,value">
+                    <p:panelGrid  columns="2" columnClasses="label,value" style="margin-top: 15px">
                         <p:outputLabel value="Introduzca el nuevo nombre:" />
                         <p:inputText value="#{productoController.producto.nombre}" />
 
@@ -31,9 +34,17 @@
                         <p:inputText value="#{productoController.producto.precio}" />
                     </p:panelGrid>
                     
+                    <p:spacer height="10px" width="100%"/>
                     
                     <p:commandButton value="Modificar" action="#{productoController.modificarProducto()}" />
                 </h:form>
+            </ui:define>
+            
+            <ui:define name="bottom">
+                <h:form class="bottom2">
+                    <p>Universidad de León</p>
+                    <p:graphicImage value="../../resources/img/ule.png" title="Universidad de León"/>
+                </h:form>                
             </ui:define>
 
         </ui:composition>
