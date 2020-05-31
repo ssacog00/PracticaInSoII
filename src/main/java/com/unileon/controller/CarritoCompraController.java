@@ -116,6 +116,7 @@ public class CarritoCompraController implements Serializable{
     
     private void calcularPrecioTotal(){
         List<Producto> listaProductosAux = (List<Producto>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("listaCarrito");
+        precioTotal = 0;
         
         for (int i=0; i<listaProductosAux.size(); i++) {
             precioTotal += listaProductosAux.get(i).getPrecio()*cantidades.get(i);
@@ -138,7 +139,7 @@ public class CarritoCompraController implements Serializable{
                 cantidades.add(i, 1);
             } else if(nuevaLista.size() == 1) {
             	
-            	if(listaProductosAux.get(i) == nuevaLista.get(0)) {
+            	if(listaProductosAux.get(i).getIdProducto() == nuevaLista.get(0).getIdProducto()) {
                     // Ya esta en la nueva lista
                     cantidades.set(0, cantidades.get(0)+1);
                 } else {
@@ -148,7 +149,7 @@ public class CarritoCompraController implements Serializable{
             	
             } else {
                 for(int j = 0; j < nuevaLista.size(); j++) {
-                    if(listaProductosAux.get(i) == nuevaLista.get(j)) {
+                    if(listaProductosAux.get(i).getIdProducto() == nuevaLista.get(j).getIdProducto()) {
                         // Ya esta en la nueva lista
                         encontrado = true;
                         posEncontrado = j;

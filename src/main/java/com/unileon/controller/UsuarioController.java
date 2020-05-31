@@ -108,7 +108,7 @@ public class UsuarioController implements Serializable{
             usuarioEJB.create(user);
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Cliente registrado"));
-            return "/index.xhtml";
+            return "/index.xhtml?faces-redirect=true";
         } catch(Exception e){
             System.out.println("Error: "+ e.getMessage());
             return "";
